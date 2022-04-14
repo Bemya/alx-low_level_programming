@@ -1,23 +1,26 @@
-#ifndef VARIADIC_FUNCTIONS
-#define VARIADIC_FUNCTIONS
-
-#include <stdlib.h>
+#include "variadic_functions.h"
+#include <stdio.h>
 #include <stdarg.h>
 /**
- * struct id_func - identifier for a print function
- * @id: character used to identify correct function
- * @f: corresponding function
+ * sum_them_all - sum all arguements
+ * @n: number of arguements
+ * Return: 0 is n is 0 or return sum
  */
-typedef struct id_func
+
+int sum_them_all(const unsigned int n, ...)
 {
-	char *id;
-	void (*f)(va_list);
-} print_id;
+	va_list numbers;
+	int sum;
+	unsigned int i;
 
-int _putchar(char c);
-int sum_them_all(const unsigned int n, ...);
-void print_numbers(const char *separator, const unsigned int n, ...);
-void print_strings(const char *separator, const unsigned int n, ...);
-void print_all(const char * const format, ...);
-
-#endif
+	if (n == 0)
+		return (0);
+	sum = 0;
+	va_start(numbers, n);
+	for (i = 0; i < n; i++)
+	{
+		sum += va_arg(numbers, int);
+	}
+	va_end(numbers);
+	return (sum);
+}
